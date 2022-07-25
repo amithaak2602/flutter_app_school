@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Model/subject_model.dart';
+import 'package:flutter_app/screen/ClassRoomScreen.dart';
 
 import 'package:flutter_app/screen/StudentScreen.dart';
+import 'package:flutter_app/screen/SubjectsScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -50,7 +53,8 @@ class HomeScreenState extends State<HomeScreen> {
                     setState(() {});
                   },
                 ),
-                Container(
+        GestureDetector(
+          child: Container(
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 6,
                   decoration: BoxDecoration(
@@ -72,7 +76,17 @@ class HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                Container(
+        onTap: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SubjectsScreen()));
+          setState(() {});
+
+        },),
+        GestureDetector(
+          child: Container(
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 6,
                   decoration: BoxDecoration(
@@ -94,6 +108,14 @@ class HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+          onTap: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ClassRoomScreen()));
+          },
+        )
               ],
             )),
       ),

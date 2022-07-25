@@ -47,10 +47,10 @@ class StudentsScreenState extends State<StudentsScreen> {
               child: Container(
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60),
-                      ),
+                      // borderRadius: BorderRadius.only(
+                      //   topLeft: Radius.circular(60),
+                      //   topRight: Radius.circular(60),
+                      // ),
                       color: Colors.white),
                   child: isLoadStudent
                       ? Center(

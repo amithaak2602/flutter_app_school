@@ -1,10 +1,10 @@
 class ClassRoomModel {
   String? name, layout;
-  int? id, size;
+  int? id, size,subject;
   ClassRoomModel({
     this.id,
     this.name,
-    this.size,this.layout,
+    this.size,this.layout,this.subject,
 
   });
 

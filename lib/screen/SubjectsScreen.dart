@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Model/classroom_model.dart';
 
 import 'package:flutter_app/Model/student_model.dart';
 import 'package:flutter_app/Model/subject_model.dart';
@@ -48,12 +49,12 @@ class SubjectsScreenState extends State<SubjectsScreen> {
             Expanded(
               child: Container(
                   height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60),
-                      ),
-                      color: Colors.white),
+                  // decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.only(
+                  //       topLeft: Radius.circular(60),
+                  //       topRight: Radius.circular(60),
+                  //     ),
+                      color: Colors.white,
                   child: isLoad
                       ? Center(
                           child: CircularProgressIndicator(
@@ -79,7 +80,6 @@ class SubjectsScreenState extends State<SubjectsScreen> {
                                             child: Container(
                                                 height: 90,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.white,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20)),
