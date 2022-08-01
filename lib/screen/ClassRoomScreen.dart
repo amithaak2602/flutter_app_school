@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/Model/classroom_model.dart';
+import 'package:flutter_app/Model/register_model.dart';
 
 import 'package:flutter_app/Model/student_model.dart';
 import 'package:flutter_app/Model/subject_model.dart';
@@ -30,6 +31,10 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
   bool isLoad = false;
   bool isLoadUpdateClassRoomList = false;
   int currentClassRoomIndex = -1;
+  List<RegistrationModel> registrationModelList = [];
+
+
+
   @override
   void initState() {
     getClassRoomData();
@@ -48,39 +53,39 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
             child: Column(
           children: [
             ListTile(
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back_ios_sharp),
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_sharp),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text(
+                "Classroom",
+                textAlign: TextAlign.left,
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              trailing: Visibility(
+                visible: tabController!.index == 0,
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.book_outlined,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                  onTap: () {
+                    SubjectDetailDialogue(subjectsModelList).then((value) {
+                      if (null != value) {
+                        subjectsModel = value!;
+                        setState(() {});
+                      }
+                    });
+
+                    setState(() {});
                   },
                 ),
-                title: Text(
-                  "Classroom",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                trailing: GestureDetector(
-                          child: Icon(
-                            Icons.book_outlined,
-                            color: Colors.white,
-                            size: 26,
-                          ),
-                          onTap: () {
-                            SubjectDetailDialogue(subjectsModelList)
-                                .then((value) {
-                              if (null != value) {
-                                subjectsModel = value!;
-                                setState(() {});
-                              }
-                            });
-
-                            setState(() {});
-                          },
-                        ),
-
-
-                    ),
+              ),
+            ),
             SizedBox(
               height: 35,
             ),
@@ -245,142 +250,132 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(13),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Card(
-                                                  color:
-                                                      currentClassRoomIndex ==
-                                                              index
-                                                          ? Colors.grey.shade300
-                                                          : Colors.white,
-                                                  elevation: 2,
-                                                  child: Container(
-                                                      height: 90,
-                                                      decoration: BoxDecoration(
-                                                        color: currentClassRoomIndex ==
-                                                                index
-                                                            ? Colors
-                                                                .grey.shade300
-                                                            : Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    20)),
-                                                      ),
-                                                      child: Center(
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            SizedBox(
-                                                              height: 10,
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Name:  ",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  classRoomProvider
-                                                                      .selectedClassRoomModelList[
-                                                                          index]
-                                                                      .name!,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Subject :  ",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  classRoomProvider
-                                                                      .selectedClassRoomModelList[
-                                                                          index]
-                                                                      .subject
-                                                                      .toString(),
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Text(
-                                                              classRoomProvider
-                                                                  .selectedClassRoomModelList[
-                                                                      index]
-                                                                  .layout
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
-                                                          ],
+                                        child: Padding(
+                                            padding: EdgeInsets.all(13),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Card(
+                                                    elevation: 2,
+                                                    child: Container(
+                                                        height: 90,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                              borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          20)),
                                                         ),
-                                                      ))),
-                                            ],
-                                          )),
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ClassViewScreen(classRoomProvider
-                                                        .selectedClassRoomModelList[
-                                                    index])));
-                                      },
-                                    );
+                                                        child: Center(
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "Name:  ",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    classRoomProvider
+                                                                        .selectedClassRoomModelList[
+                                                                            index]
+                                                                        .name!,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "Subject :  ",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    classRoomProvider
+                                                                        .selectedClassRoomModelList[
+                                                                            index]
+                                                                        .subject
+                                                                        .toString(),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                classRoomProvider
+                                                                    .selectedClassRoomModelList[
+                                                                        index]
+                                                                    .layout
+                                                                    .toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 16,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ))),
+                                              ],
+                                            )),
+                                        onTap: () {
+                                          classRoomModel =  classRoomProvider
+                                              .selectedClassRoomModelList[
+                                          index];
+                                          getRegistrationsData(classRoomModel);
+                                          setState(() {});
+                                        });
                                   })
                               : Center(
                                   child: Text("No data found"),
@@ -476,7 +471,7 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
   }
 
   Future classRoomAlertDialogue(
-      SubjectsModel subjectsModel, int classRoomId) async {
+      SubjectsModel selectedSubjectsModel, int classRoomId) async {
     return await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -557,8 +552,8 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                null != subjectsModel.name!.toString()
-                                    ? subjectsModel.name!.toString()
+                                null != selectedSubjectsModel.name!.toString()
+                                    ? selectedSubjectsModel.name!.toString()
                                     : "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -566,8 +561,8 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
                                 ),
                               ),
                               Text(
-                                null != subjectsModel.teacher.toString()
-                                    ? subjectsModel.teacher.toString()
+                                null != selectedSubjectsModel.teacher.toString()
+                                    ? selectedSubjectsModel.teacher.toString()
                                     : "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -590,7 +585,9 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
                           )),
                       onPressed: () {
                         Provider.of<ClassRoomProvider>(context, listen: false)
-                            .updateClassRoom(subjectsModel.id!, classRoomId);
+                            .updateClassRoom(
+                                selectedSubjectsModel, classRoomId);
+                        subjectsModel = new SubjectsModel();
                         Navigator.pop(context);
                         setState(() {});
                       },
@@ -633,6 +630,40 @@ class ClassRoomScreenState extends State<ClassRoomScreen>
       var data = jsonData['subjects'];
       subjectsModelList =
           List<SubjectsModel>.from(data.map((x) => SubjectsModel.fromJson(x)));
+      setState(() {});
+    } else {
+      return false;
+    }
+  }
+
+  Future getRegistrationsData(ClassRoomModel classRoomModel) async {
+    String url =
+        "https://hamon-interviewapi.herokuapp.com/registration/?api_key=126a5";
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      String responseString = response.body.toString();
+      var jsonData = jsonDecode(responseString);
+      var data = jsonData['registrations'];
+      registrationModelList = List<RegistrationModel>.from(
+          data.map((x) => new RegistrationModel.fromJson(x)));
+      List<RegistrationModel> list = [];
+      for (int i = 0;
+      i < registrationModelList.length;
+      i++) {
+        if (registrationModelList[i].subject ==
+          classRoomModel
+                .subject) {
+          list.add(registrationModelList[i]);
+        }
+      }
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ClassViewScreen(
+                      classRoomModel,
+                      list)));
       setState(() {});
     } else {
       return false;

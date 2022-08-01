@@ -1,6 +1,6 @@
 class ClassRoomModel {
-  String? name, layout;
-  int? id, size,subject;
+  String? name, layout,subjectName,teacher;
+  int? id, size,subject,credits;
   ClassRoomModel({
     this.id,
     this.name,
